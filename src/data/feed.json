@@ -14,69 +14,68 @@
   },
   "items": [
     {
-      "id": "case-proj_greenleaf_ai",
+      "id": "case-proj_greenleaf",
       "type": "case",
       "title": "GreenLeaf AI Consultant",
-      "summary": "SaaS AI-консультант для e-commerce каталога (370+ SKU) с RAG-системой, семантическим поиском и Telegram-интерфейсом.",
-      "content": "• Ограничение контекста LLM\n• Семантический поиск vs ключевые слова\n• Минимизация стоимости токенов",
+      "summary": "SaaS AI-консультант для e-commerce каталога wellness-продукции. Telegram-бот с RAG-системой, гибридным поиском и реферальной системой для партнеров.",
+      "content": "• Гибридный поиск повышает релевантность RAG\n• Оптимизация архитектуры снижает эксплуатационные расходы",
       "tags": [
         "Python",
         "Aiogram 3",
-        "PostgreSQL"
+        "OpenAI API"
       ],
       "technologies": [
         "Python",
         "Aiogram 3",
+        "OpenAI API",
         "PostgreSQL",
         "pgvector",
-        "OpenAI API",
-        "Docker",
+        "Supabase",
+        "Docker Compose",
         "GitHub Actions",
-        "Google Cloud"
+        "Hetzner Cloud"
       ],
       "media": [
         "/media/GreenLeaf_bot_responce.png"
       ],
       "architecture": {
-        "pattern": "RAG / Telegram Bot",
-        "diagram_mermaid": "graph TD\n    Telegram --> Aiogram\n    Aiogram --> ConversationManager\n    ConversationManager --> HistoryManager\n    HistoryManager --> SemanticSearch\n    SemanticSearch --> Embeddings\n    Embeddings --> pgvector\n    pgvector --> GPT\n    GPT --> Answer"
+        "pattern": "RAG + Hybrid Search + Microservices (Bot)",
+        "diagram_mermaid": "graph TD\n    A[Telegram Users] -->|Bot API| B(Aiogram Bot)\n    B --> C{AccessMiddleware}\n    C -->|Valid| D[LLM Engine OpenAI]\n    C -->|Valid| E[DB Layer Supabase/PostgreSQL]\n    E --> F[pgvector Semantic Search]\n    E --> G[Keyword Search]\n    F & G --> H[Hybrid Results]\n    H --> D\n    D --> I[Personalized Response]\n    I --> A"
       }
     },
     {
-      "id": "case-proj_mediacube_nav",
+      "id": "case-proj_mediacube_sync",
       "type": "case",
       "title": "MC PAY -> NAV Integration",
-      "summary": "Интеграция биллинговой платформы MC PAY с ERP Microsoft Dynamics NAV через n8n и SOAP API для автоматизации создания контрагентов.",
-      "content": "• Идемпотентность ETL-процессов\n• Эффективность SOAP для Enterprise ERP\n• Узкое место в оркестрации\n• Важность тестовой среды",
+      "summary": "Автоматизация синхронизации биллинговой платформы MC PAY с ERP Microsoft Dynamics NAV через n8n. Идемпотентный ETL-пайплайн создания контрагентов.",
+      "content": "• Идемпотентность обязательна для ETL\n• SOAP эффективен для корпоративных ERP\n• Пакетная обработка для обхода UI-ограничений\n• Тестирование в Sandbox снижает риски",
       "tags": [
         "n8n",
         "PostgreSQL",
-        "SQL"
+        "Microsoft Dynamics NAV"
       ],
       "technologies": [
         "n8n",
         "PostgreSQL",
-        "SQL",
         "Microsoft Dynamics NAV",
-        "SOAP API",
-        "XML",
-        "JSON",
-        "Slack API"
+        "SOAP Web Services",
+        "Slack API",
+        "SQL"
       ],
       "media": [
         "/media/Mediacube_workflow_vendor_creating.png"
       ],
       "architecture": {
-        "pattern": "ETL / Scheduled Workflow",
-        "diagram_mermaid": "graph TD\n    MCPAY --> SQL\n    SQL --> n8n\n    n8n --> CheckVendor\n    CheckVendor --> Mapping\n    Mapping --> SOAPCreate\n    SOAPCreate --> XMLtoJSON\n    XMLtoJSON --> Logging\n    Logging --> Slack"
+        "pattern": "ETL + Scheduled Workflow + Idempotent Sync",
+        "diagram_mermaid": "graph TD\n    A[MC PAY PostgreSQL] -->|SQL SELECT| B(n8n Workflow)\n    B --> C{Check Vendor Exists?}\n    C -->|No| D[SOAP Create Vendor]\n    C -->|Yes| E[Skip]\n    D --> F[XML to JSON Mapping]\n    F --> G[Log & Slack Notify]\n    E --> G\n    G --> H[Microsoft Dynamics NAV]"
       }
     },
     {
       "id": "case-proj_estimate_analyzer",
       "type": "case",
       "title": "Estimate Analyzer",
-      "summary": "On-Premise AI-платформа для анализа строительных смет с нормализацией Excel в реляционную модель и Text-to-SQL интерфейсом.",
-      "content": "• Время подготовки данных\n• Специализированные парсеры для Excel\n• Text-to-SQL для не-технических пользователей\n• Защита конфиденциальных данных\n• Streamlit для быстрого MVP",
+      "summary": "On-Premise AI-платформа для анализа строительных смет формата SANA. Парсинг Excel, нормализация в реляционную модель, Text-to-SQL интерфейс с гарантией конфиденциальности.",
+      "content": "• Нормализация данных занимает больше времени, чем LLM\n• Инженерные Excel требуют специализированных парсеров\n• Text-to-SQL снижает порог входа для пользователей\n• Streamlit идеален для MVP, но не для production",
       "tags": [
         "Python",
         "Pandas",
@@ -97,16 +96,16 @@
         "/media/estimate analyzer.png"
       ],
       "architecture": {
-        "pattern": "Zero Data Leak / Text-to-SQL",
-        "diagram_mermaid": "graph TD\n    Excel --> Parser\n    Parser --> Normalizer\n    Normalizer --> PostgreSQL\n    PostgreSQL --> SQLAlchemy\n    SQLAlchemy --> TextToSQL\n    TextToSQL --> AlemLLM\n    AlemLLM --> Streamlit"
+        "pattern": "Zero Data Leak + Text-to-SQL + Local Processing",
+        "diagram_mermaid": "graph TD\n    A[Excel SANA] --> B[Parser & Normalizer]\n    B --> C[PostgreSQL/SQLite]\n    C --> D[SQLAlchemy ORM]\n    D --> E{Text-to-SQL Engine}\n    E -->|Schema + Query| F[Alem LLM API]\n    F -->|Generated SQL| E\n    E -->|Execute Locally| C\n    C --> G[Streamlit UI]"
       }
     },
     {
-      "id": "case-proj_global_wine_kpi",
+      "id": "case-proj_globalwine_reporting",
       "type": "case",
       "title": "Global Wine Reporting Pipeline",
-      "summary": "Автоматизация аналитики продаж и расчета KPI торговой команды на базе OLAP-кубов и Excel.",
-      "content": "Архитектура реализована успешно.",
+      "summary": "Автоматизация аналитики продаж и расчета KPI торговой команды. ETL на базе OLAP-кубов и Excel, классификация ассортимента, план-факт анализ.",
+      "content": "• Понимание бизнес-процессов критично для автоматизации",
       "tags": [
         "Excel",
         "OLAP",
@@ -118,25 +117,52 @@
         "SQL"
       ],
       "media": [
-        "/media/placeholder_proj_global_wine_kpi.svg"
+        "/media/placeholder_proj_globalwine_reporting.svg"
       ],
       "architecture": {
-        "pattern": "ETL / OLAP Cubes",
-        "diagram_mermaid": "graph TD\n    SalesData --> ETL\n    ETL --> Classification\n    Classification --> OLAP\n    OLAP --> KPICalc\n    KPICalc --> Report"
+        "pattern": "Batch ETL + OLAP Aggregation",
+        "diagram_mermaid": "graph TD\n    A[Sales Data] --> B[ETL Process]\n    B --> C[OLAP Cubes]\n    C --> D[KPI Calculation Model]\n    D --> E[Automated Report Template]"
+      }
+    },
+    {
+      "id": "case-proj_smart_supplier",
+      "type": "case",
+      "title": "Smart Supplier SaaS",
+      "summary": "Дипломный проект: SaaS-платформа для управления складскими запасами. ИИ-агенты на n8n для анализа дефицита и автоматической отправки заявок поставщикам.",
+      "content": "Архитектура реализована успешно.",
+      "tags": [
+        "React 18",
+        "Vite",
+        "n8n"
+      ],
+      "technologies": [
+        "React 18",
+        "Vite",
+        "n8n",
+        "Tailwind CSS",
+        "LLM API (OpenAI/OpenRouter)",
+        "GitHub Actions"
+      ],
+      "media": [
+        "/media/placeholder_proj_smart_supplier.svg"
+      ],
+      "architecture": {
+        "pattern": "SPA + AI Orchestration Backend",
+        "diagram_mermaid": "graph TD\n    A[React SPA] -->|Webhooks| B[n8n Orchestration]\n    B --> C{Inventory Check}\n    C -->|Low Stock| D[LLM Analysis]\n    D --> E[Auto Email to Supplier]\n    E --> A"
       }
     },
     {
       "id": "decision-0",
       "type": "decision",
       "title": "Почему IDEMPOTENCY?",
-      "summary": "Идемпотентность ETL-процессов",
-      "content": "Идемпотентность является обязательным свойством для любых ETL-процессов, работающих по расписанию. Проверка существования записей по бизнес-идентификатору предотвращает дублирование при повторных запусках.",
+      "summary": "Идемпотентность обязательна для ETL",
+      "content": "Повторный запуск процесса не должен создавать дубликаты. Проверка по бизнес-идентификатору перед созданием записи критична для надежности.",
       "tags": [
         "Process"
       ],
       "technologies": [
         "N8N",
-        "SQL"
+        "SOAP"
       ],
       "media": []
     },
@@ -144,13 +170,13 @@
       "id": "decision-1",
       "type": "decision",
       "title": "Почему SOAP?",
-      "summary": "Эффективность SOAP для Enterprise ERP",
-      "content": "SOAP остается эффективным инструментом для интеграции корпоративных ERP-систем и обеспечивает высокую производительность при работе с большими объемами данных.",
+      "summary": "SOAP эффективен для корпоративных ERP",
+      "content": "SOAP остается надежным инструментом для интеграции с унаследованными ERP-системами, обеспечивая строгую типизацию и высокую производительность.",
       "tags": [
         "Architecture"
       ],
       "technologies": [
-        "API",
+        "SOAP",
         "NAV"
       ],
       "media": []
@@ -158,9 +184,9 @@
     {
       "id": "decision-2",
       "type": "decision",
-      "title": "Почему BOTTLENECK?",
-      "summary": "Узкое место в оркестрации",
-      "content": "Основным узким местом интеграции может быть не ERP, а инструмент оркестрации или пользовательский интерфейс. Пакетная обработка данных решает проблему перегрузки UI.",
+      "title": "Почему BATCH-PROCESSING?",
+      "summary": "Пакетная обработка для обхода UI-ограничений",
+      "content": "При обработке выборок >30 000 записей интерфейс n8n становится узким местом. Разбиение на батчи по 1000 записей решает проблему перегрузки.",
       "tags": [
         "Performance"
       ],
@@ -173,8 +199,8 @@
       "id": "decision-3",
       "type": "decision",
       "title": "Почему TESTING?",
-      "summary": "Важность тестовой среды",
-      "content": "Полноценная тестовая среда значительно снижает риски при внедрении изменений в production. Использование Sandbox-копии ERP позволяет безопасно проверять SOAP-запросы и Cron.",
+      "summary": "Тестирование в Sandbox снижает риски",
+      "content": "Полноценная тестовая копия ERP позволяет безопасно проверять создание, обновление и удаление записей перед публикацией в production.",
       "tags": [
         "Process"
       ],
@@ -186,15 +212,15 @@
     {
       "id": "decision-4",
       "type": "decision",
-      "title": "Почему DATA_ENGINEERING?",
-      "summary": "Время подготовки данных",
-      "content": "Большинство времени занимает не работа LLM, а подготовка и нормализация данных. Качественный парсер критичен для успеха AI-проекта.",
+      "title": "Почему DATA-ENGINEERING?",
+      "summary": "Нормализация данных занимает больше времени, чем LLM",
+      "content": "В AI-проектах основная сложность и время уходят на парсинг, очистку и приведение неструктурированных данных к реляционной модели.",
       "tags": [
         "Process"
       ],
       "technologies": [
-        "PYTHON",
-        "PANDAS"
+        "PANDAS",
+        "SQLALCHEMY"
       ],
       "media": []
     },
@@ -202,53 +228,38 @@
       "id": "decision-5",
       "type": "decision",
       "title": "Почему PARSING?",
-      "summary": "Специализированные парсеры для Excel",
-      "content": "Excel-документы инженерного назначения требуют специализированных парсеров — универсальные библиотеки не всегда подходят из-за сложной структуры.",
+      "summary": "Инженерные Excel требуют специализированных парсеров",
+      "content": "Универсальные библиотеки часто не справляются со сложной структурой строительных смет. Необходима кастомная логика извлечения материалов и работ.",
       "tags": [
-        "Architecture"
+        "Performance"
       ],
       "technologies": [
-        "PYTHON",
-        "EXCEL"
+        "EXCEL",
+        "PANDAS"
       ],
       "media": []
     },
     {
       "id": "decision-6",
       "type": "decision",
-      "title": "Почему TEXT_TO_SQL?",
-      "summary": "Text-to-SQL для не-технических пользователей",
-      "content": "Text-to-SQL позволяет значительно снизить порог входа для пользователей, не владеющих SQL, превращая базу данных в интерактивный чат.",
+      "title": "Почему TEXT-TO-SQL?",
+      "summary": "Text-to-SQL снижает порог входа для пользователей",
+      "content": "Позволяет специалистам без знаний SQL выполнять сложные аналитические запросы на естественном языке, ускоряя принятие решений.",
       "tags": [
         "Architecture"
       ],
       "technologies": [
-        "SQL",
-        "API"
+        "LLM",
+        "SQL"
       ],
       "media": []
     },
     {
       "id": "decision-7",
       "type": "decision",
-      "title": "Почему SECURITY?",
-      "summary": "Защита конфиденциальных данных",
-      "content": "Конфиденциальные данные можно эффективно защищать, разделяя генерацию SQL и выполнение запросов. В облако передаются только схема и вопрос.",
-      "tags": [
-        "Security"
-      ],
-      "technologies": [
-        "SQL",
-        "API"
-      ],
-      "media": []
-    },
-    {
-      "id": "decision-8",
-      "type": "decision",
       "title": "Почему MVP?",
-      "summary": "Streamlit для быстрого MVP",
-      "content": "Streamlit хорошо подходит для быстрого создания MVP и проверки инженерных гипотез, но для промышленной эксплуатации потребуются более масштабируемые решения.",
+      "summary": "Streamlit идеален для MVP, но не для production",
+      "content": "Отлично подходит для быстрой проверки инженерных гипотез и создания прототипов, но требует замены на масштабируемый фронтенд для промышленной эксплуатации.",
       "tags": [
         "Process"
       ],
@@ -258,45 +269,62 @@
       "media": []
     },
     {
-      "id": "decision-9",
+      "id": "decision-8",
       "type": "decision",
-      "title": "Почему CONTEXT_WINDOW?",
-      "summary": "Ограничение контекста LLM",
-      "content": "Нельзя бесконечно отправлять историю сообщений в GPT. Необходимо реализовывать выбор только наиболее важных сообщений для сохранения релевантности и снижения затрат.",
+      "title": "Почему SECURITY?",
+      "summary": "Разделение генерации и выполнения SQL защищает данные",
+      "content": "Передача только схемы и вопроса во внешнюю LLM, с локальным выполнением запроса, гарантирует конфиденциальность финансовых данных.",
       "tags": [
-        "Architecture"
+        "Security"
       ],
       "technologies": [
-        "API"
+        "LLM",
+        "POSTGRESQL"
+      ],
+      "media": []
+    },
+    {
+      "id": "decision-9",
+      "type": "decision",
+      "title": "Почему BUSINESS-LOGIC?",
+      "summary": "Понимание бизнес-процессов критично для автоматизации",
+      "content": "Опыт работы в бизнесе позволяет выявлять реальные боли (KPI, отчетность) и строить решения, которые действительно экономят время и деньги.",
+      "tags": [
+        "Process"
+      ],
+      "technologies": [
+        "EXCEL",
+        "OLAP"
       ],
       "media": []
     },
     {
       "id": "decision-10",
       "type": "decision",
-      "title": "Почему SEMANTIC_SEARCH?",
-      "summary": "Семантический поиск vs ключевые слова",
-      "content": "Простой поиск по ключевым словам дает неудовлетворительный результат. Внедрение поиска по embeddings значительно улучшает качество подбора информации.",
+      "title": "Почему RAG?",
+      "summary": "Гибридный поиск повышает релевантность RAG",
+      "content": "Сочетание keyword search и semantic search (cosine similarity) позволяет точно находить товары по точным названиям и по смыслу запроса.",
       "tags": [
         "Architecture"
       ],
       "technologies": [
         "PGVECTOR",
-        "API"
+        "OPENAI"
       ],
       "media": []
     },
     {
       "id": "decision-11",
       "type": "decision",
-      "title": "Почему COST_OPTIMIZATION?",
-      "summary": "Минимизация стоимости токенов",
-      "content": "Большая часть логики должна быть построена таким образом, чтобы максимально сократить количество токенов, что критично для коммерческой эксплуатации AI-сервисов.",
+      "title": "Почему COST-OPTIMIZATION?",
+      "summary": "Оптимизация архитектуры снижает эксплуатационные расходы",
+      "content": "Правильный выбор хостинга, моделей LLM и оптимизация запросов позволяет удерживать стоимость production-сервиса на уровне ~3-15 USD/мес.",
       "tags": [
         "Performance"
       ],
       "technologies": [
-        "API"
+        "HETZNER",
+        "OPENAI"
       ],
       "media": []
     }

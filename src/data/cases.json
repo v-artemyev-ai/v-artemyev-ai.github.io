@@ -177,5 +177,47 @@
       "diagram_mermaid": "graph TD\n    SalesData --> ETL\n    ETL --> Classification\n    Classification --> OLAP\n    OLAP --> KPICalc\n    KPICalc --> Report"
     },
     "lessons_text": []
+  },
+  {
+    "id": "proj_myfreedom_diplom",
+    "title": "Smart Supplier SaaS (AI-Склад)",
+    "subtitle": "Дипломный проект школы MYFreedom",
+    "category": "AI & SaaS",
+    "status": "completed",
+    "problem": "Дипломный проект курса «Создание ИИ-агентов для бизнеса Low/No-code» от школы MYFreedom. Интерактивная SaaS-система управления складскими остатками с ИИ-аналитиком и автоматическим закупщиком товаров через вебхуки n8n.",
+    "solution": "• Интеграция React 18 / Vite фронтенда с оркестратором n8n\n• Автоматический мониторинг дефицита позиций на складе с помощью LLM\n• Генерация и отправка email-заказов поставщикам",
+    "result": "• Сокращение времени составления заявки поставщику с 20 минут до 5 секунд\n• 100% авто-мониторинг остатков в режиме реального времени\n• Успешная защита диплома в школе MYFreedom",
+    "tech": [
+      "React 18",
+      "Vite",
+      "n8n Webhooks",
+      "Tailwind CSS",
+      "Recharts",
+      "Framer Motion",
+      "LLM Agents"
+    ],
+    "tags": [
+      "React 18",
+      "n8n",
+      "MYFreedom",
+      "AI Agents"
+    ],
+    "images": [
+      "/media/MyFreedom_diplom_work_1.png",
+      "/media/MyFreedom_diplom_work_2.png",
+      "/media/MyFreedom_diplom_work_3.png",
+      "/media/MyFreedom_diplom_work_4.png"
+    ],
+    "repository_url": "https://github.com/ekzor88-gif/My_Freedom_diplom_work",
+    "architecture": {
+      "pattern": "React SPA + n8n AI Orchestrator",
+      "diagram_mermaid": "graph TD\n    ReactUI[React 18 / Vite UI] -->|Webhooks| n8n[n8n Orchestrator]\n    n8n -->|Stock Check| DB[(Inventory DB)]\n    n8n -->|Analyze Deficit| LLM[LLM AI Agent]\n    LLM -->|Generate Order| Mailer[Email Supplier Bot]\n    Mailer -->|Send Order| Supplier[Supplier Email]"
+    },
+    "lessons_text": [
+      {
+        "title": "Интеграция Low-Code и React",
+        "description": "Связка n8n вебхуков с современной SPA-архитектурой на React позволяет ускорить разработку бэкенд-логики ИИ-агентов в 5 раз."
+      }
+    ]
   }
 ]
