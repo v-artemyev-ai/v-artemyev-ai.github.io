@@ -6,9 +6,9 @@ const siteConfig = {
   url: 'https://yourdomain.kz',
 
   social: {
-    telegram: { url: 'https://t.me/v_artemyev', label: '@v_artemyev' },
-    whatsapp: { url: 'https://wa.me/77010990057', label: '+7 (701) 099-00-57' },
-    email: { url: 'mailto:v.artemyev.ai@gmail.com', label: 'v.artemyev.ai@gmail.com' },
+    telegram: { url: 'https://t.me/v_artemyev_ai', label: '@v_artemyev_ai' },
+    whatsapp: { url: 'https://wa.me/77053090668', label: '+7 (705) 309-06-68' },
+    email: { url: 'mailto:ekzor88@gmail.com', label: 'ekzor88@gmail.com' },
     github: { url: 'https://github.com/ekzor88-gif', label: 'GitHub' },
     linkedin: { url: 'https://linkedin.com/in/v-artemyev', label: 'LinkedIn' }
   },
