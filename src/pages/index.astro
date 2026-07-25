@@ -2,20 +2,74 @@
 import Layout from '../components/Layout.astro';
 import Hero from '../components/Hero.astro';
 import cases from '../data/cases.json';
+import { siteConfig } from '../config/site.js';
 ---
 
 <Layout title="Senior Software Engineer | AiOps & Automation" description="Middle+/Senior Software Engineer Portfolio">
   <Hero />
-  
+
+  <!-- About Me Summary Section -->
+  <section class="py-20 border-t border-white/5 bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-accent/10 border border-accent/20 text-accent text-xs font-mono mb-4">
+            ОБО МНЕ
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight">
+            От первых программ на Turbo Pascal до Enterprise AI-интеграций
+          </h2>
+          <div class="space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed">
+            <p>
+              Мой путь в технологиях начался еще с MS-DOS и Turbo Pascal. Сегодня я проектирую надежные AI-системы, микросервисы и пайплайны данных, решающие сложные задачи бизнеса.
+            </p>
+            <p>
+              За плечами — <strong>8 лет в FMCG и дистрибуции</strong>. Это дало мне глубокое понимание бизнес-процессов: от логистики и учетных систем в 1С/ERP до взаимодействия отделов продаж и реальной экономики предприятий. Прошел путь в проектах Tech Orda и Mediacube.
+            </p>
+            <blockquote class="p-4 rounded-xl glass border-l-4 border-accent text-white font-medium italic my-4">
+              «Моя суперсила — я соединяю мир реального бизнеса с передовыми технологиями, создавая решения с измеримым финансовым эффектом.»
+            </blockquote>
+          </div>
+          <div class="mt-8">
+            <a href="/about/" class="inline-flex items-center text-accent hover:text-white font-medium transition-colors">
+              Читать полную историю &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-6 rounded-2xl glass border border-white/10 text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-accent mb-2">8+ лет</div>
+              <div class="text-xs sm:text-sm text-gray-400">Понимания бизнеса & FMCG</div>
+            </div>
+            <div class="p-6 rounded-2xl glass border border-white/10 text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-accent mb-2">370+</div>
+              <div class="text-xs sm:text-sm text-gray-400">SKU в RAG-системе</div>
+            </div>
+            <div class="p-6 rounded-2xl glass border border-white/10 text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-accent mb-2">30 сек</div>
+              <div class="text-xs sm:text-sm text-gray-400">Консультация (было 20 мин)</div>
+            </div>
+            <div class="p-6 rounded-2xl glass border border-white/10 text-center">
+              <div class="text-3xl sm:text-4xl font-bold text-accent mb-2">Zero Leak</div>
+              <div class="text-xs sm:text-sm text-gray-400">Безопасность данных</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Key Projects Preview -->
   <section class="py-24 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between mb-12">
         <div>
-          <h2 class="text-3xl font-bold text-white mb-4 tracking-tight">Ключевые проекты</h2>
-          <p class="text-gray-400 max-w-xl">Детальный разбор production-архитектур, ETL-пайплайнов и внедрения RAG.</p>
+          <h2 class="text-3xl font-bold text-white mb-4 tracking-tight">Ключевые проекты с цифрами</h2>
+          <p class="text-gray-400 max-w-xl">Детальный разбор production-архитектур, RAG-платформ и измеримых результатов.</p>
         </div>
-        <a href="/cases/" class="hidden sm:inline-flex text-gray-400 hover:text-white transition-colors text-sm font-medium">
+        <a href="/cases/" class="hidden sm:inline-flex text-accent hover:underline transition-colors text-sm font-medium">
           Посмотреть все {cases.length} кейсов &rarr;
         </a>
       </div>
@@ -24,21 +78,30 @@ import cases from '../data/cases.json';
         {cases.slice(0, 4).map((c) => (
           <a href={`/cases/${c.id}`} class="group block p-8 rounded-2xl glass hover:border-accent/50 transition-all duration-300">
             <div class="flex justify-between items-start mb-6">
-              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-400 text-xs font-mono">{c.category}</span>
+              <span class="px-2.5 py-1 rounded-md bg-accent/10 border border-accent/20 text-accent text-xs font-mono">{c.category}</span>
               <svg class="w-5 h-5 text-gray-600 group-hover:text-accent transition-colors -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">{c.title}</h3>
-            <p class="text-gray-400 text-sm mb-6 line-clamp-3">{c.problem}</p>
+            <p class="text-gray-400 text-sm mb-4 line-clamp-2">{c.problem}</p>
+            
+            {c.result && (
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10 mb-6 text-xs text-gray-300 font-mono leading-relaxed whitespace-pre-line">
+                <span class="text-accent font-bold">Измеримый результат:</span>
+                <br />
+                {c.result}
+              </div>
+            )}
+
             <div class="flex flex-wrap gap-2">
               {c.tags.map((t) => (
-                <span class="text-gray-500 text-xs font-mono">{t}</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-gray-400 text-xs font-mono">{t}</span>
               ))}
             </div>
           </a>
         ))}
       </div>
       <div class="mt-8 text-center sm:hidden">
-        <a href="/cases/" class="inline-flex text-gray-400 hover:text-white transition-colors text-sm font-medium">
+        <a href="/cases/" class="inline-flex text-accent hover:underline text-sm font-medium">
           Посмотреть все кейсы &rarr;
         </a>
       </div>
@@ -51,7 +114,7 @@ import cases from '../data/cases.json';
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-white mb-6 tracking-tight">Инженерная философия</h2>
       <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
-        Я верю в идемпотентные процессы, архитектуру Zero Data Leak и выбор "скучных" технологий (PostgreSQL, SOAP), когда они лучше всего решают задачи бизнеса.
+        Я верю в идемпотентные процессы, архитектуру Zero Data Leak и выбор надежных технологий (PostgreSQL, SOAP), когда они лучше всего решают задачи бизнеса.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="/decisions/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl glass hover:bg-white/10 text-white font-medium text-sm transition-all">
@@ -59,6 +122,40 @@ import cases from '../data/cases.json';
         </a>
         <a href="/lessons/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl glass hover:bg-white/10 text-white font-medium text-sm transition-all">
           Lessons Learned
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call To Action (CTA) Section -->
+  <section class="py-20 border-t border-white/10 bg-gradient-to-r from-accent/10 via-dark-800 to-accent/5">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+        Давайте обсудим ваш проект!
+      </h2>
+      <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+        Ищу возможности для внедрения автоматизации, RAG и AI в бизнес-процессы. Открыт к предложению интересных задач и роли Senior / Lead Engineer.
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-4">
+        <a
+          href={siteConfig.social.telegram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent hover:bg-accent-dark text-dark-900 font-bold text-base transition-all duration-200"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.02-.15-.057-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.12.098.152.229.166.327.016.108.035.35.02.541z"/>
+          </svg>
+          Написать в Telegram
+        </a>
+        <a
+          href={siteConfig.social.email.url}
+          class="inline-flex items-center gap-2 px-8 py-4 rounded-xl glass hover:bg-white/10 text-white font-medium text-base transition-all duration-200"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Написать на Email
         </a>
       </div>
     </div>

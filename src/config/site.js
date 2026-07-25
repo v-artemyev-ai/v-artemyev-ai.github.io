@@ -6,9 +6,11 @@ const siteConfig = {
   url: 'https://yourdomain.kz',
 
   social: {
-    telegram: { url: 'https://t.me/yourusername', label: 'TG' },
-    whatsapp: { url: 'https://wa.me/77010990057', label: 'WA' },
-    email: { url: 'mailto:hello@yourdomain.kz', label: 'hello@yourdomain.kz' },
+    telegram: { url: 'https://t.me/v_artemyev', label: '@v_artemyev' },
+    whatsapp: { url: 'https://wa.me/77010990057', label: '+7 (701) 099-00-57' },
+    email: { url: 'mailto:v.artemyev.ai@gmail.com', label: 'v.artemyev.ai@gmail.com' },
+    github: { url: 'https://github.com/v-artemyev-ai', label: 'GitHub' },
+    linkedin: { url: 'https://linkedin.com/in/v-artemyev', label: 'LinkedIn' }
   },
 };
 
