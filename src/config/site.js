@@ -9,7 +9,7 @@ const siteConfig = {
     telegram: { url: 'https://t.me/v_artemyev', label: '@v_artemyev' },
     whatsapp: { url: 'https://wa.me/77010990057', label: '+7 (701) 099-00-57' },
     email: { url: 'mailto:v.artemyev.ai@gmail.com', label: 'v.artemyev.ai@gmail.com' },
-    github: { url: 'https://github.com/v-artemyev-ai', label: 'GitHub' },
+    github: { url: 'https://github.com/ekzor88-gif', label: 'GitHub' },
     linkedin: { url: 'https://linkedin.com/in/v-artemyev', label: 'LinkedIn' }
   },
 };
